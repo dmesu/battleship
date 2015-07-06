@@ -23,11 +23,16 @@ beforeEach(function(){
 })
 
 describe('Battleship Game', function(){
-  xit('should return "Water!" if the move hits no ship', function(){
+  xit('You sank my battleship! spec', function(){
     position_generator_get_position_for_battleship.returns(new Position("A3", "Vertical"));
     position_generator_get_position_for_first_destructor.returns(new Position("B3", "Vertical"));
     position_generator_get_position_for_second_destructor.returns(new Position("C3", "Vertical"));
-    assert.strictEqual(game.play('a2'), 'Water!');
+
+    assert.strictEqual(game.play('a3'), 'Hit!');
+    assert.strictEqual(game.play('a4'), 'Hit!');
+    assert.strictEqual(game.play('a5'), 'Hit!');
+    assert.strictEqual(game.play('a6'), 'Hit!');
+    assert.strictEqual(game.play('a7'), 'You sank my battleship!');
   });
 });
 
