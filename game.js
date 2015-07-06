@@ -3,7 +3,7 @@ function Game(gridGenerator) {
 }
 
 Game.prototype.play = function(move) {
-  return "";
+  return this.gridGenerator.updateWith(move);
 }
 
 module.exports = Game;
