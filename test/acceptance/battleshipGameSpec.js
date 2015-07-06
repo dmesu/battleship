@@ -15,14 +15,14 @@ var position_generator_get_position_for_battleship,
     position_generator_get_position_for_first_destructor,
     position_generator_get_position_for_second_destructor;
 
-beforeEach(function(){
-  position_generator_get_position_for_battleship = sinon.stub(randomPositionShipGenerator, 'getPositionForBattleship');
-  position_generator_get_position_for_first_destructor = sinon.stub(randomPositionShipGenerator, 'getPositionForFirstDestructor');
-  position_generator_get_position_for_second_destructor = sinon.stub(randomPositionShipGenerator, 'getPositionForSecondDestructor');
-
-})
-
 describe('Battleship Game', function(){
+  beforeEach(function(){
+    position_generator_get_position_for_battleship = sinon.stub(randomPositionShipGenerator, 'getPositionForBattleship');
+    position_generator_get_position_for_first_destructor = sinon.stub(randomPositionShipGenerator, 'getPositionForFirstDestructor');
+    position_generator_get_position_for_second_destructor = sinon.stub(randomPositionShipGenerator, 'getPositionForSecondDestructor');
+
+  })
+
   xit('You sank my battleship! spec', function(){
     position_generator_get_position_for_battleship.returns(new Position("A3", "Vertical"));
     position_generator_get_position_for_first_destructor.returns(new Position("B3", "Vertical"));
@@ -34,7 +34,9 @@ describe('Battleship Game', function(){
     assert.strictEqual(game.play('a6'), 'Hit!');
     assert.strictEqual(game.play('a7'), 'You sank my battleship!');
   });
+
+  afterEach(function(){
+  })
 });
 
-afterEach(function(){
-})
+
