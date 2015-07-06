@@ -1,0 +1,17 @@
+{
+  "name": "battleshipGame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "play.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  },
+  "author": "dmesu",
+  "license": "MIT"
+}
