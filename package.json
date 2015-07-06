@@ -10,7 +10,9 @@
 
   },
   "devDependencies": {
-
+    "mocha": "^2.2.5",
+    "chai": "*",
+    "sinon": "^1.15.3"
   },
   "author": "dmesu",
   "license": "MIT"
