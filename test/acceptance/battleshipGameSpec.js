@@ -2,6 +2,7 @@ var Game = require('../../game.js');
 var RandomPositionShipGenerator = require('../../randomPositionShipGenerator.js');
 var GridGenerator = require('../../gridGenerator.js');
 var Position = require('../../position.js');
+var Ship = require('../../ship.js');
 var assert = require('chai').assert;
 var sinon = require('sinon');
 
@@ -9,7 +10,7 @@ var columnsSize = 10;
 var rowsSize = 10;
 var randomPositionShipGenerator = new RandomPositionShipGenerator(columnsSize, rowsSize);
 var gridGenerator = new GridGenerator(randomPositionShipGenerator);
-var game = new Game(gridGenerator);
+var game = new Game(gridGenerator, new Ship(5), new Ship(4), new Ship(4));
 
 var position_generator_get_position_for_battleship,
     position_generator_get_position_for_first_destructor,
