@@ -1,30 +1,61 @@
-function Game(gridGenerator, battleship, firstDestructor, secondDestructor) {
-  this.gridGenerator = gridGenerator;
+function Game(grid, battleship, firstDestructor, secondDestructor) {
+  this.grid = grid;
   this.battleship = battleship;
   this.firstDestructor = firstDestructor;
   this.secondDestructor = secondDestructor;
 }
 
 Game.prototype.play = function(move) {
-  var moveOutcome = this.gridGenerator.updateWith(move);
-  return moveOutcome === 'Water!' ? moveOutcome : this.decideIfShipHasBeenSunken(moveOutcome);
+  var moveOutcome = this.grid.updateWith(move);
+  return (moveOutcome === 'Water!' || moveOutcome === 'already shot') ?
+        moveOutcome :
+        this.decideGameStatusAfterHit(moveOutcome);
 }
 
-Game.prototype.decideIfShipHasBeenSunken = function(moveOutcome){
-  if (moveOutcome === 'Battleship'){
+Game.prototype.decideGameStatusAfterHit = function(moveOutcome){
+  if (moveOutcome === 'battleship'){
     this.battleship.hit();
-    return this.battleship.sank() ? 'You sank my battleship!' : 'Hit!';
+    if (this.battleship.sunk()){
+      if (this.allShipsAreSunk()){
+        return 'Game over. You win!';
+      }else{
+        return 'You sank my battleship!';
+      }
+    } else {
+      return 'Hit!';
+    }
   }
-  if (moveOutcome === 'First Destructor'){
-    this.battleship.hit();
-    return this.battleship.sank() ? 'You sank my first destructor!' : 'Hit!';
+  if (moveOutcome === 'first destructor'){
+    this.firstDestructor.hit();
+    if (this.firstDestructor.sunk()){
+      if (this.allShipsAreSunk()){
+        return 'Game over. You win!';
+      }else{
+        return 'You sank my first destructor!';
+      }
+    } else {
+      return 'Hit!';
+    }
   }
 
-  if (moveOutcome === 'Second Destructor'){
-    this.battleship.hit();
-    return this.battleship.sank() ? 'You sank my second destructor!' : 'Hit!';
+  if (moveOutcome === 'second destructor'){
+    this.secondDestructor.hit();
+    if (this.secondDestructor.sunk()){
+      if (this.allShipsAreSunk()){
+        return 'Game over. You win!';
+      }else{
+        return 'You sank my second destructor!';
+      }
+    } else {
+      return 'Hit!';
+    }
   }
 }
 
+Game.prototype.allShipsAreSunk = function(){
+  return this.battleship.sunk() &&
+          this.firstDestructor.sunk() &&
+          this.secondDestructor.sunk();
+}
 
 module.exports = Game;

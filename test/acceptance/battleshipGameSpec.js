@@ -1,39 +1,26 @@
 var Game = require('../../game.js');
-var RandomPositionShipGenerator = require('../../randomPositionShipGenerator.js');
 var GridGenerator = require('../../gridGenerator.js');
-var Position = require('../../position.js');
 var Ship = require('../../ship.js');
 var assert = require('chai').assert;
 var sinon = require('sinon');
+var game;
 
-var columnsSize = 10;
-var rowsSize = 10;
-var randomPositionShipGenerator = new RandomPositionShipGenerator(columnsSize, rowsSize);
-var gridGenerator = new GridGenerator(randomPositionShipGenerator);
-var game = new Game(gridGenerator, new Ship(5), new Ship(4), new Ship(4));
-
-var position_generator_get_position_for_battleship,
-    position_generator_get_position_for_first_destructor,
-    position_generator_get_position_for_second_destructor;
 
 describe('Battleship Game', function(){
   beforeEach(function(){
-    position_generator_get_position_for_battleship = sinon.stub(randomPositionShipGenerator, 'getPositionForBattleship');
-    position_generator_get_position_for_first_destructor = sinon.stub(randomPositionShipGenerator, 'getPositionForFirstDestructor');
-    position_generator_get_position_for_second_destructor = sinon.stub(randomPositionShipGenerator, 'getPositionForSecondDestructor');
 
   })
 
-  xit('You sank my battleship! spec', function(){
-    position_generator_get_position_for_battleship.returns(new Position("A3", "Vertical"));
-    position_generator_get_position_for_first_destructor.returns(new Position("B3", "Vertical"));
-    position_generator_get_position_for_second_destructor.returns(new Position("C3", "Vertical"));
+  it('You sank my battleship! spec', function(){
+    game = new Game(new GridGenerator().generate(), new Ship(3), new Ship(1), new Ship(1));
+    assert.strictEqual(game.play('a1'), 'Hit!');
+    assert.strictEqual(game.play('a2'), 'Hit!');
+    assert.strictEqual(game.play('a3'), 'You sank my battleship!');
+  });
 
-    assert.strictEqual(game.play('a3'), 'Hit!');
-    assert.strictEqual(game.play('a4'), 'Hit!');
-    assert.strictEqual(game.play('a5'), 'Hit!');
-    assert.strictEqual(game.play('a6'), 'Hit!');
-    assert.strictEqual(game.play('a7'), 'You sank my battleship!');
+  it('Game over, you win', function(){
+    game = new Game(new GridGenerator().generate(), new Ship(1), new Ship(0), new Ship(0));
+    assert.strictEqual(game.play('a1'), 'Game over. You win!');
   });
 
   afterEach(function(){
