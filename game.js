@@ -15,6 +15,10 @@ Game.prototype.decideIfShipHasBeenSunken = function(moveOutcome){
     this.battleship.hit();
     return this.battleship.sank() ? 'You sank my battleship!' : 'Hit!';
   }
+  if (moveOutcome === 'First Destructor'){
+    this.battleship.hit();
+    return this.battleship.sank() ? 'You sank my first destructor!' : 'Hit!';
+  }
 }
 
 

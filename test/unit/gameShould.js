@@ -33,6 +33,12 @@ describe('Game', function(){
     assert.strictEqual(game.play(move), 'You sank my battleship!');
   });
 
+  it('should return "You sank my first destructor!" if the move sank the first destructor', function(){
+    var game = new Game(gridGenerator, new Ship(1), new Ship(4), new Ship(4));
+    grid_generator_update_with.returns('First Destructor');
+    assert.strictEqual(game.play(move), 'You sank my first destructor!');
+  });
+
   afterEach(function(){
     grid_generator_update_with.restore();
   })
