@@ -28,7 +28,7 @@ Game.prototype.decideGameStatusAfterHit = function(moveOutcome){
       return 'Hit!';
     }
   }
-  if (moveOutcome === 'first destructor'){
+  if (moveOutcome === 'firstDestructor'){
     this.firstDestructor.hit();
     if (this.firstDestructor.sunk()){
       if (this.allShipsAreSunk()){
@@ -41,7 +41,7 @@ Game.prototype.decideGameStatusAfterHit = function(moveOutcome){
     }
   }
 
-  if (moveOutcome === 'second destructor'){
+  if (moveOutcome === 'secondDestructor'){
     this.secondDestructor.hit();
     if (this.secondDestructor.sunk()){
       if (this.allShipsAreSunk()){

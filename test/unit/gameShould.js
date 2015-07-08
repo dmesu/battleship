@@ -41,19 +41,19 @@ describe('Game', function(){
 
   it('should return "You sank my first destructor!" if the move sank the first destructor', function(){
     var game = new Game(grid, new Ship(5), new Ship(1), new Ship(4));
-    grid_update_with.returns('first destructor');
-    assert.strictEqual(game.play(move), 'You sank my first destructor!');
+    grid_update_with.returns('firstDestructor');
+    assert.strictEqual(game.play(move), 'You sank my firstDestructor!');
   });
 
   it('should return "You sank my second destructor!" if the move sank the second destructor', function(){
     var game = new Game(grid, new Ship(5), new Ship(4), new Ship(1));
-    grid_update_with.returns('second destructor');
-    assert.strictEqual(game.play(move), 'You sank my second destructor!');
+    grid_update_with.returns('secondDestructor');
+    assert.strictEqual(game.play(move), 'You sank my secondDestructor!');
   });
 
   it('should return "Game over. You win!" if the move sank the last ship', function(){
     var game = new Game(grid, new Ship(0), new Ship(0), new Ship(1));
-    grid_update_with.returns('second destructor');
+    grid_update_with.returns('secondDestructor');
     assert.strictEqual(game.play(move), 'Game over. You win!');
   });
 
