@@ -12,14 +12,17 @@ Game.prototype.play = function(move) {
         this.decideGameStatusAfterHit(moveOutcome);
 }
 
+
+
 Game.prototype.decideGameStatusAfterHit = function(moveOutcome){
+
   if (moveOutcome === 'battleship'){
     this.battleship.hit();
     if (this.battleship.sunk()){
       if (this.allShipsAreSunk()){
         return 'Game over. You win!';
       }else{
-        return 'You sank my battleship!';
+        return 'You sank my ' + moveOutcome + '!';
       }
     } else {
       return 'Hit!';
@@ -31,7 +34,7 @@ Game.prototype.decideGameStatusAfterHit = function(moveOutcome){
       if (this.allShipsAreSunk()){
         return 'Game over. You win!';
       }else{
-        return 'You sank my first destructor!';
+        return 'You sank my ' + moveOutcome + '!';
       }
     } else {
       return 'Hit!';
@@ -44,7 +47,7 @@ Game.prototype.decideGameStatusAfterHit = function(moveOutcome){
       if (this.allShipsAreSunk()){
         return 'Game over. You win!';
       }else{
-        return 'You sank my second destructor!';
+        return 'You sank my ' + moveOutcome + '!';
       }
     } else {
       return 'Hit!';

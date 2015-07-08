@@ -15,9 +15,7 @@ Grid.prototype.updateWith = function(move){
     return cell.getNameShip();
   }
   return "Water!";
-
 }
 
 module.exports = Grid;
-
 
