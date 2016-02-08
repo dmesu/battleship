@@ -12,51 +12,17 @@ Game.prototype.play = function(move) {
         this.decideGameStatusAfterHit(moveOutcome);
 }
 
-
-
-Game.prototype.decideGameStatusAfterHit = function(moveOutcome){
-
-  if (moveOutcome === 'battleship'){
-    this.battleship.hit();
-    if (this.battleship.sunk()){
-      if (this.allShipsAreSunk()){
-        return 'Game over. You win!';
-      }else{
-        return 'You sank my ' + moveOutcome + '!';
-      }
+Game.prototype.decideGameStatusAfterHit = function(ship){
+    this[ship].hit();
+    if (this[ship].sunk()){
+      return this.allShipsAreSunk() ? 'Game over. You win!' : 'You sank my ' + ship + '!';
     } else {
       return 'Hit!';
     }
-  }
-  if (moveOutcome === 'firstDestructor'){
-    this.firstDestructor.hit();
-    if (this.firstDestructor.sunk()){
-      if (this.allShipsAreSunk()){
-        return 'Game over. You win!';
-      }else{
-        return 'You sank my ' + moveOutcome + '!';
-      }
-    } else {
-      return 'Hit!';
-    }
-  }
-
-  if (moveOutcome === 'secondDestructor'){
-    this.secondDestructor.hit();
-    if (this.secondDestructor.sunk()){
-      if (this.allShipsAreSunk()){
-        return 'Game over. You win!';
-      }else{
-        return 'You sank my ' + moveOutcome + '!';
-      }
-    } else {
-      return 'Hit!';
-    }
-  }
 }
 
 Game.prototype.allShipsAreSunk = function(){
-  return this.battleship.sunk() &&
+  return  this.battleship.sunk() &&
           this.firstDestructor.sunk() &&
           this.secondDestructor.sunk();
 }
